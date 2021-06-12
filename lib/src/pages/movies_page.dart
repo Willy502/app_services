@@ -47,7 +47,7 @@ class MoviesPage extends StatelessWidget {
             builder: (BuildContext context, AsyncSnapshot snapshot) {
 
               if (snapshot.hasData) {
-                return MovieHorizontalWidget(movies: snapshot.data); // Aqui estará la funcionalidad
+                return MovieHorizontalWidget(movies: snapshot.data, nextPage: moviesProvider.getPopulares); // Aqui estará la funcionalidad
               } else {
                 return Center(child: CircularProgressIndicator());
               }

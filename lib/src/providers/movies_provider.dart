@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:app_services/src/models/movie_model.dart';
 import 'package:http/http.dart' as http;
+import '';
 
 class MoviesProvider {
 
@@ -10,6 +11,7 @@ class MoviesProvider {
   String _url = 'api.themoviedb.org';
   String _language = 'en-EN';
 
+  bool _cargando = false;
   List<Movie> _populares = [];
   int _popularesPage = 0;
 
@@ -23,6 +25,8 @@ class MoviesProvider {
   }
 
   Future<List<Movie>> getPopulares() async {
+    if (_cargando) return [];
+    _cargando = true;
     _popularesPage++;
 
     final url = Uri.https(_url, '3/movie/popular', {
@@ -38,6 +42,8 @@ class MoviesProvider {
     final movies = Movies.fromJsonArray(decodedData["results"]).items;
     _populares.addAll(movies);
     popularesSink(_populares);
+
+    _cargando = false;
     return movies;
 
   }
