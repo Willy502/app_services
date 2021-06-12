@@ -1,5 +1,6 @@
 import 'package:app_services/src/providers/movies_provider.dart';
 import 'package:app_services/src/shared/preferences.dart';
+import 'package:app_services/src/widgets/movie_horizontal_widget.dart';
 import 'package:flutter/material.dart';
 
 class MoviesPage extends StatelessWidget {
@@ -43,7 +44,7 @@ class MoviesPage extends StatelessWidget {
             builder: (BuildContext context, AsyncSnapshot snapshot) {
 
               if (snapshot.hasData) {
-                return Container(); // Aqui estará la funcionalidad
+                return MovieHorizontalWidget(movies: snapshot.data); // Aqui estará la funcionalidad
               } else {
                 return Center(child: CircularProgressIndicator());
               }
