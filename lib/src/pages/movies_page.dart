@@ -9,6 +9,9 @@ class MoviesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    moviesProvider.getPopulares();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Movies'),

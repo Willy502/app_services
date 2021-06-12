@@ -5,6 +5,7 @@ class MovieHorizontalWidget extends StatelessWidget {
   final List<Movie>? movies;
 
   MovieHorizontalWidget({@required this.movies});
+  final _pageController = PageController(initialPage: 1, viewportFraction: 0.3);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,8 @@ class MovieHorizontalWidget extends StatelessWidget {
     return Container(
       height: _screenSize.height * 0.3,
       child: PageView.builder(
-        //pageSnapping: true,
+        pageSnapping: false,
+        controller: _pageController,
         itemCount: movies!.length,
         itemBuilder: (context, position) => _createCard(movies![position])
       ),
@@ -29,7 +31,7 @@ class MovieHorizontalWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.0),
             child: FadeInImage(
               placeholder: AssetImage('assets/img/no-image.jpg'),
-              image: NetworkImage(''),
+              image: NetworkImage(movie.getPosterImage()),
               fit: BoxFit.cover,
               height: 160.0
             ),
@@ -37,7 +39,7 @@ class MovieHorizontalWidget extends StatelessWidget {
           SizedBox(height: 5.0),
           Text(
             movie.title!,
-            
+            overflow: TextOverflow.ellipsis,
           )
         ],
       ),
